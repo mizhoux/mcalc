@@ -34,7 +34,10 @@ public class Function extends AbstractToken implements Token {
 
             for (int i = 0; i < params.length; i++) {
                 String paramStr = paramStrs[i].trim();
-                params[i] = new Num(paramStr);
+                
+                // 如果需要参数也能是表达式，修改这个地方
+                // 先计算出表达式的值（Num），然后将其作为参数
+                params[i] = new Num(paramStr); 
             }
         }
     }

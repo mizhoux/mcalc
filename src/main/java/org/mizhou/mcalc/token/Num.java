@@ -58,11 +58,6 @@ public class Num extends AbstractToken implements Token {
     }
 
     @Override
-    public boolean isNumber() {
-        return true;
-    }
-
-    @Override
     public TokenType getType() {
         return TokenType.NUMBER;
     }

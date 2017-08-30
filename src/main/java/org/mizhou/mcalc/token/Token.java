@@ -17,4 +17,6 @@ public interface Token {
 
     public boolean isBracket();
 
+    public boolean isFunction();
+    
 }

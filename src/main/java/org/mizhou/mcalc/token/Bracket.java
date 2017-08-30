@@ -29,11 +29,6 @@ public class Bracket extends AbstractToken implements Token {
     }
 
     @Override
-    public boolean isBracket() {
-        return true;
-    }
-
-    @Override
     public TokenType getType() {
         return TokenType.BRACKET;
     }

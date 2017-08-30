@@ -9,17 +9,22 @@ public abstract class AbstractToken implements Token {
 
     @Override
     public boolean isNumber() {
-        return false;
+        return getType() == TokenType.NUMBER;
     }
 
     @Override
     public boolean isOperator() {
-        return false;
+        return getType() == TokenType.OPERATOR;
     }
 
     @Override
     public boolean isBracket() {
-        return false;
+        return getType() == TokenType.BRACKET;
+    }
+
+    @Override
+    public boolean isFunction() {
+        return getType() == TokenType.FUNCTION;
     }
 
 }

@@ -47,11 +47,6 @@ public class Operator extends AbstractToken implements Token {
     }
 
     @Override
-    public boolean isOperator() {
-        return true;
-    }
-
-    @Override
     public TokenType getType() {
         return TokenType.OPERATOR;
     }

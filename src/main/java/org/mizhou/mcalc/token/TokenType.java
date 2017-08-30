@@ -23,4 +23,5 @@ public enum TokenType {
      * 函数
      */
     FUNCTION
+
 }
