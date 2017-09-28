@@ -1,5 +1,6 @@
 package org.mizhou.mcalc.token;
 
+import org.mizhou.mcalc.exception.UnknownFunctionException;
 import org.mizhou.mcalc.func.Func;
 import org.mizhou.mcalc.func.FuncFactory;
 
@@ -54,7 +55,7 @@ public class Function extends AbstractToken implements Token {
             return function.apply(params);
         }
 
-        throw new RuntimeException("未知的函数：" + name);
+        throw new UnknownFunctionException(name);
     }
 
     @Override

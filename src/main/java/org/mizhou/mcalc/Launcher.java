@@ -3,6 +3,7 @@ package org.mizhou.mcalc;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import org.mizhou.mcalc.exception.UnknownFunctionException;
 import org.mizhou.mcalc.token.Num;
 
 /**
@@ -39,6 +40,8 @@ public class Launcher {
 
                     System.out.println(result);
 
+                } catch (UnknownFunctionException ex) {
+                    System.out.println(ex.getMessage());
                 } catch (ArithmeticException ex) {
                     System.out.println("运算错误：" + ex.getMessage());
                 } catch (RuntimeException ex) {

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.mizhou.mcalc.exception.ExpressionMismatchException;
+import org.mizhou.mcalc.exception.InvalidExpressionException;
 import org.mizhou.mcalc.token.Bracket;
 import org.mizhou.mcalc.token.Function;
 import org.mizhou.mcalc.token.Num;
@@ -20,7 +22,14 @@ import org.mizhou.mcalc.token.Token;
 public class Expression {
 
     private static final String REG_EXPR
-            = "\\s*((\\(-(\\d*\\.\\d+|\\d+)\\))|(\\d*\\.\\d+|\\d+)|(\\+|-|\\*|/)|(\\(|\\))|([A-Za-z]+\\(.*\\)))\\s*";
+            = "\\s*("
+            + "(\\(-(\\d*\\.\\d+|\\d+)\\))|"
+            + "(\\d*\\.\\d+|\\d+)|"
+            + "(\\+|-|\\*|/)|"
+            + "(\\(|\\))|"
+            + "([A-Za-z]+\\(.*\\))"
+            + ")\\s*";
+
     private static final Pattern PATTERN = Pattern.compile(REG_EXPR);
 
     private final List<Token> tokens; // 该表达式中的所有 Token
@@ -124,7 +133,7 @@ public class Expression {
      */
     public Num calculate() {
         if (!isPostfix()) {
-            throw new RuntimeException("请先将表达式转为后缀表达式再计算");
+            throw new ExpressionMismatchException();
         }
 
         ArrayDeque<Token> stack = new ArrayDeque<>();
@@ -146,7 +155,7 @@ public class Expression {
         }
 
         if (stack.size() != 1) { // 栈中最后剩下的不止一个数，说明表达式有问题
-            throw new RuntimeException("错误的表达式");
+            throw new InvalidExpressionException();
         }
 
         return (Num) stack.pop();
