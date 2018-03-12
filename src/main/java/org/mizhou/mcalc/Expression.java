@@ -23,11 +23,11 @@ public class Expression {
 
     private static final String REG_EXPR
             = "\\s*("
-            + "(\\(-(\\d*\\.\\d+|\\d+)\\))|"
-            + "(\\d*\\.\\d+|\\d+)|"
-            + "(\\+|-|\\*|/)|"
-            + "(\\(|\\))|"
-            + "([A-Za-z]+\\(.*\\))"
+            + "(\\(-(\\d*\\.\\d+|\\d+)\\))" + "|" // 负数
+            + "(\\d*\\.\\d+|\\d+)" + "|"          // 正数
+            + "(\\+|-|\\*|/)" + "|"               // 运算符
+            + "(\\(|\\))" + "|"                   // 括号
+            + "([A-Za-z]+\\(.*\\))"               // 函数
             + ")\\s*";
 
     private static final Pattern PATTERN = Pattern.compile(REG_EXPR);
@@ -114,7 +114,7 @@ public class Expression {
             }
         }
 
-        throw new RuntimeException("getToken"); // 正则无误的情况下不会发生
+        throw new RuntimeException("Expression.getToken: Unbelievable"); // 正则无误的情况下不会发生
     }
 
     /**
