@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.mizhou.mcalc.exception.ExpressionMismatchException;
 import org.mizhou.mcalc.exception.InvalidExpressionException;
 import org.mizhou.mcalc.token.Bracket;
-import org.mizhou.mcalc.token.Function;
+import org.mizhou.mcalc.token.Func;
 import org.mizhou.mcalc.token.Num;
 import org.mizhou.mcalc.token.Operator;
 import org.mizhou.mcalc.token.Token;
@@ -24,10 +24,10 @@ public class Expression {
     private static final String REG_EXPR
             = "\\s*("
             + "(\\(-(\\d*\\.\\d+|\\d+)\\))" + "|" // 负数
-            + "(\\d*\\.\\d+|\\d+)" + "|"          // 正数
-            + "(\\+|-|\\*|/)" + "|"               // 运算符
-            + "(\\(|\\))" + "|"                   // 括号
-            + "([A-Za-z]+\\(.*\\))"               // 函数
+            + "(\\d*\\.\\d+|\\d+)" + "|" // 正数
+            + "(\\+|-|\\*|/)" + "|" // 运算符
+            + "(\\(|\\))" + "|" // 括号
+            + "([A-Za-z]+\\(.*\\))" // 函数
             + ")\\s*";
 
     private static final Pattern PATTERN = Pattern.compile(REG_EXPR);
@@ -50,7 +50,7 @@ public class Expression {
      * @param expr 给定的字符串
      * @return 表达式（中缀）
      */
-    public static Expression of(String expr) {
+    public static Expression parse(String expr) {
         List<Token> exprTokens = parseTokens(expr);
         return new Expression(exprTokens, false);
     }
@@ -81,7 +81,7 @@ public class Expression {
 
             } else { // 没有找到匹配正则的子串，说明表达式包含了非正则中定义的文本
                 String errorExpr = expr.substring(start);
-                throw new RuntimeException("解析错误：" + errorExpr);
+                throw new IllegalArgumentException("解析错误：" + errorExpr);
             }
         }
 
@@ -107,8 +107,8 @@ public class Expression {
                 return new Bracket(matcher.group(6).charAt(0));
 
             } else if (matcher.group(7) != null) { // 函数
-                Function function = new Function(matcher.group(7));
-                Num num = function.getResult(); // 直接计算出函数的值作为 Token
+                Func func = new Func(matcher.group(7));
+                Num num = func.getResult(); // 直接计算出函数的值作为 Token
 
                 return num;
             }

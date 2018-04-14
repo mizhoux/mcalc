@@ -1,22 +1,22 @@
 package org.mizhou.mcalc.token;
 
 import org.mizhou.mcalc.exception.UnknownFunctionException;
-import org.mizhou.mcalc.func.Func;
-import org.mizhou.mcalc.func.FuncFactory;
+import org.mizhou.mcalc.function.FunctionFactory;
+import org.mizhou.mcalc.function.Function;
 
 /**
  * 函数 Token
  *
  * @author Michael Chow <mizhoux@gmail.com>
  */
-public class Function extends AbstractToken implements Token {
+public class Func extends AbstractToken implements Token {
 
     private static final Num[] PARAMS_NONE = new Num[0];
 
     private final String name;  // 名字
     private final Num[] params; // 参数
 
-    public Function(String content) {
+    public Func(String content) {
         int indexOfLeftBracket = content.indexOf('(');
         int indexOfRightBracket = content.lastIndexOf(')');
 
@@ -49,7 +49,7 @@ public class Function extends AbstractToken implements Token {
      * @return 函数的结果
      */
     public Num getResult() {
-        Func function = FuncFactory.getFunc(name);
+        Function function = FunctionFactory.getFunction(name);
 
         if (function != null) {
             return function.apply(params);

@@ -34,7 +34,7 @@ public class Launcher {
                 }
 
                 try {
-                    Expression expr = Expression.of(line);
+                    Expression expr = Expression.parse(line);
                     Expression postfixExpr = expr.toPostfixExpr();
                     Num result = postfixExpr.calculate();
 

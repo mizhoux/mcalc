@@ -1,4 +1,4 @@
-package org.mizhou.mcalc.func;
+package org.mizhou.mcalc.function;
 
 import org.mizhou.mcalc.token.Num;
 
@@ -7,7 +7,7 @@ import org.mizhou.mcalc.token.Num;
  *
  * @author Michael Chow <mizhoux@gmail.com>
  */
-public class LogFunc implements Func {
+public class LogFunction implements Function {
 
     @Override
     public Num apply(Num[] params) {

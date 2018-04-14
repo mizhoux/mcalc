@@ -19,12 +19,16 @@ public class Num extends AbstractToken implements Token {
 
     private final BigDecimal value;
 
-    public Num(BigDecimal value) {
-        this.value = value;
+    public Num(BigDecimal val) {
+        this.value = val;
     }
 
-    public Num(String value) {
-        this.value = new BigDecimal(value);
+    public Num(String val) {
+        this.value = new BigDecimal(val);
+    }
+
+    public Num(double val) {
+        this.value = new BigDecimal(val, MATH_CONTEXT);
     }
 
     public BigDecimal value() {

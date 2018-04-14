@@ -5,7 +5,7 @@ package org.mizhou.mcalc.token;
  *
  * @author Michael Chow <mizhoux@gmail.com>
  */
-public class Operator extends AbstractToken implements Token {
+public class Operator extends AbstractToken implements Token, Comparable<Operator> {
 
     private final char value;
 
@@ -22,7 +22,7 @@ public class Operator extends AbstractToken implements Token {
     }
 
     /**
-     * 获得运算符的优先级
+     * 获得运算符的优先级，返回的数字越大，优先级越高
      *
      * @return 运算符的优先级
      */
@@ -54,6 +54,22 @@ public class Operator extends AbstractToken implements Token {
     @Override
     public String text() {
         return String.valueOf(value);
+    }
+
+    @Override
+    public String toString() {
+        return text();
+    }
+
+    /**
+     * 优先级高的运算符相对位置在前
+     *
+     * @param other 待比较的运算符
+     * @return
+     */
+    @Override
+    public int compareTo(Operator other) {
+        return other.property() - this.property();
     }
 
 }

@@ -1,4 +1,4 @@
-package org.mizhou.mcalc.func;
+package org.mizhou.mcalc.function;
 
 import java.math.BigDecimal;
 import org.mizhou.mcalc.token.Num;
@@ -8,7 +8,7 @@ import org.mizhou.mcalc.token.Num;
  *
  * @author Michael Chow <mizhoux@gmail.com>
  */
-public class PowFunc implements Func {
+public class PowFunction implements Function {
 
     @Override
     public Num apply(Num[] params) {
@@ -21,11 +21,13 @@ public class PowFunc implements Func {
 
         if (b.toString().indexOf('.') == -1) { // 是整数
             BigDecimal result = a.pow(b.intValue());
+            
             return new Num(result);
         }
 
         double result = Math.pow(a.doubleValue(), b.doubleValue());
-        return new Num(String.valueOf(result));
+        
+        return new Num(result);
     }
 
 }
